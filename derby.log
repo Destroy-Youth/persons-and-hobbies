@@ -1,0 +1,61 @@
+----------------------------------------------------------------
+Wed Jun 10 20:12:53 CDT 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0172-a0ef-da88-00000c76ad70 
+on database directory memory:C:\Users\Ivan\Documents\Projects\java\persons-and-hobbies\fbbb5a36-e2ed-4038-8002-6c2eba1e4bb9 with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
+Loaded from file:/C:/Users/Ivan/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_251-b08
+user.dir=C:\Users\Ivan\Documents\Projects\java\persons-and-hobbies
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Wed Jun 10 20:13:49 CDT 2020:
+Shutting down instance a816c00e-0172-a0ef-da88-00000c76ad70 on database directory memory:C:\Users\Ivan\Documents\Projects\java\persons-and-hobbies\fbbb5a36-e2ed-4038-8002-6c2eba1e4bb9 with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
+----------------------------------------------------------------
+Wed Jun 10 20:13:50 CDT 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance 989c00e1-0172-a0ef-da88-00000c76ad70 
+on database directory memory:C:\Users\Ivan\Documents\Projects\java\persons-and-hobbies\02405a27-c02c-450c-a003-21d63556de69 with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
+Loaded from file:/C:/Users/Ivan/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_251-b08
+user.dir=C:\Users\Ivan\Documents\Projects\java\persons-and-hobbies
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Wed Jun 10 20:15:27 CDT 2020:
+Shutting down instance 989c00e1-0172-a0ef-da88-00000c76ad70 on database directory memory:C:\Users\Ivan\Documents\Projects\java\persons-and-hobbies\02405a27-c02c-450c-a003-21d63556de69 with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
+----------------------------------------------------------------
+Wed Jun 10 20:15:28 CDT 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance b49b81b4-0172-a0ef-da88-00000c76ad70 
+on database directory memory:C:\Users\Ivan\Documents\Projects\java\persons-and-hobbies\d4b582ca-8742-4b65-8a8f-d6cc3e9b82c4 with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
+Loaded from file:/C:/Users/Ivan/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_251-b08
+user.dir=C:\Users\Ivan\Documents\Projects\java\persons-and-hobbies
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Wed Jun 10 20:18:23 CDT 2020:
+Shutting down instance b49b81b4-0172-a0ef-da88-00000c76ad70 on database directory memory:C:\Users\Ivan\Documents\Projects\java\persons-and-hobbies\d4b582ca-8742-4b65-8a8f-d6cc3e9b82c4 with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
+----------------------------------------------------------------
+Wed Jun 10 20:18:24 CDT 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance ac154287-0172-a0ef-da88-00000c76ad70 
+on database directory memory:C:\Users\Ivan\Documents\Projects\java\persons-and-hobbies\5b623ab7-7f98-465b-b464-014a15ee8f00 with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
+Loaded from file:/C:/Users/Ivan/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_251-b08
+user.dir=C:\Users\Ivan\Documents\Projects\java\persons-and-hobbies
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
