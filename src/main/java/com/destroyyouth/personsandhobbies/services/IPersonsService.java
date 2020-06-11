@@ -10,9 +10,7 @@ import org.springframework.stereotype.Service;
  * IPersonsService
  */
 @Service
-public interface IPersonsService {
-
-    List<PersonsDTO> findAll();
+public interface IPersonsService extends ISearch<PersonsDTO, Integer> {
 
     void savePerson(PersonsDTO person);
 }
