@@ -34,7 +34,7 @@ public class HobbiesService implements IHobbiesService {
     public HobbiesDTO hobbiesDTOMapper(Hobbies entity) {
 
         HobbiesDTO dto = new HobbiesDTO();
-        dto.setId(entity.getId());
+        dto.setId(entity.getHobbieId());
         dto.setName(entity.getName());
 
         return dto;
