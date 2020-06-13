@@ -9,7 +9,9 @@ import java.util.stream.Collectors;
 import com.destroyyouth.personsandhobbies.model.Hobbies;
 import com.destroyyouth.personsandhobbies.model.Persons;
 import com.destroyyouth.personsandhobbies.persistence.IPersonsRepository;
+import com.destroyyouth.personsandhobbies.services.IHobbiesService;
 import com.destroyyouth.personsandhobbies.services.IPersonsService;
+import com.destroyyouth.personsandhobbies.utils.ExceptionSuppliers;
 import com.destroyyouth.personsandhobbies.commons.dtos.PersonsDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,24 +25,26 @@ import org.springframework.util.ObjectUtils;
 public class PersonsService implements IPersonsService {
 
     @Autowired
-    private IPersonsRepository repository;
+    private IPersonsRepository personsRepository;
+    @Autowired
+    private IHobbiesService hobbiesService;
 
     @Override
     public List<PersonsDTO> findAll() {
-        List<Persons> persons = repository.findAll();
+        List<Persons> persons = personsRepository.findAll();
 
-        List<PersonsDTO> personsTO = persons.stream().map(this::personsTransformer).collect(Collectors.toList());
+        List<PersonsDTO> personsTO = persons.stream().map(this::personsDTOMapper).collect(Collectors.toList());
 
         return personsTO;
     }
 
     @Override
     public void savePerson(PersonsDTO personTO) {
-        Persons newPerson = personsDTOTransformer(personTO);
-        repository.save(newPerson);
+        Persons newPerson = personsMapper(personTO);
+        personsRepository.save(newPerson);
     }
 
-    private PersonsDTO personsTransformer(Persons person) {
+    private PersonsDTO personsDTOMapper(Persons person) {
         PersonsDTO personDTO = new PersonsDTO();
 
         personDTO.setId(person.getId());
@@ -49,12 +53,13 @@ public class PersonsService implements IPersonsService {
         personDTO.setBirthDate(person.getBirthDate().toString());
         personDTO.setMail(person.getMail());
         personDTO.setSex(person.getSex());
-        // TODO personDTO.setHobbies(hobbies);
+        personDTO.setHobbies(person.getHobbies().parallelStream().map(hobbiesService::hobbiesDTOMapper)
+                .collect(Collectors.toList()));
 
         return personDTO;
     }
 
-    private Persons personsDTOTransformer(PersonsDTO personTO) {
+    private Persons personsMapper(PersonsDTO personTO) {
         Persons person = new Persons();
         Date birthDate = new Date();
         try {
@@ -80,6 +85,12 @@ public class PersonsService implements IPersonsService {
         }
 
         return person;
+    }
+
+    @Override
+    public PersonsDTO findById(Integer id) {
+        Persons person = personsRepository.findById(id).orElseThrow(ExceptionSuppliers.NOT_FOUND);
+        return personsDTOMapper(person);
     }
 
 }
