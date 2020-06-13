@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.UniqueConstraint;
 
 /**
@@ -38,6 +39,9 @@ public class Persons implements Serializable {
     @JoinTable(name = "persons_hobbies", uniqueConstraints = @UniqueConstraint(columnNames = { "person_id",
             "hobbie_id" }), joinColumns = @JoinColumn(name = "person_id"), inverseJoinColumns = @JoinColumn(name = "hobbie_id"))
     private List<Hobbies> hobbies;
+    @ManyToOne()
+    @JoinColumn(name = "address_id")
+    private Addresses address;
 
     public String getFirstName() {
         return firstName;

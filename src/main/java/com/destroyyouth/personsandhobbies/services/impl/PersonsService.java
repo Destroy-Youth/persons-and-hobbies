@@ -33,9 +33,7 @@ public class PersonsService implements IPersonsService {
     public List<PersonsDTO> findAll() {
         List<Persons> persons = personsRepository.findAll();
 
-        List<PersonsDTO> personsTO = persons.stream().map(this::personsDTOMapper).collect(Collectors.toList());
-
-        return personsTO;
+        return persons.parallelStream().map(this::personsDTOMapper).collect(Collectors.toList());
     }
 
     @Override
@@ -78,6 +76,7 @@ public class PersonsService implements IPersonsService {
         if (!ObjectUtils.isEmpty(personTO.getHobbies())) {
             List<Hobbies> hobbies = personTO.getHobbies().stream().map(hobbieTO -> {
                 Hobbies hobbie = new Hobbies();
+                hobbie.setHobbieId(hobbieTO.getId());
                 hobbie.setName(hobbieTO.getName());
                 return hobbie;
             }).collect(Collectors.toList());
