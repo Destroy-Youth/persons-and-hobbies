@@ -6,13 +6,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.destroyyouth.personsandhobbies.commons.dtos.PersonsDTO;
 import com.destroyyouth.personsandhobbies.model.Hobbies;
 import com.destroyyouth.personsandhobbies.model.Persons;
 import com.destroyyouth.personsandhobbies.persistence.IPersonsRepository;
 import com.destroyyouth.personsandhobbies.services.IHobbiesService;
 import com.destroyyouth.personsandhobbies.services.IPersonsService;
 import com.destroyyouth.personsandhobbies.utils.ExceptionSuppliers;
-import com.destroyyouth.personsandhobbies.commons.dtos.PersonsDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,7 +47,7 @@ public class PersonsService implements IPersonsService {
     private PersonsDTO personsDTOMapper(Persons person) {
         PersonsDTO personDTO = new PersonsDTO();
 
-        personDTO.setId(person.getId());
+        personDTO.setId(person.getPersonId());
         personDTO.setFirstName(person.getFirstName());
         personDTO.setLastName(person.getLastName());
         personDTO.setBirthDate(person.getBirthDate().toString());

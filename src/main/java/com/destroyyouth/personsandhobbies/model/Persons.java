@@ -4,13 +4,15 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.UniqueConstraint;
 
 /**
  * Persons
@@ -25,24 +27,17 @@ public class Persons implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Integer personId;
     private String firstName;
     private String lastName;
     @Column(name = "birthdate")
     private Date birthDate;
     private String mail;
     private String sex;
-    private Integer idHobbie;
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinTable(name = "persons_hobbies", uniqueConstraints = @UniqueConstraint(columnNames = { "person_id",
+            "hobbie_id" }), joinColumns = @JoinColumn(name = "person_id"), inverseJoinColumns = @JoinColumn(name = "hobbie_id"))
     private List<Hobbies> hobbies;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -84,20 +79,20 @@ public class Persons implements Serializable {
         this.sex = sex;
     }
 
+    public Integer getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(Integer personId) {
+        this.personId = personId;
+    }
+
     public List<Hobbies> getHobbies() {
         return hobbies;
     }
 
     public void setHobbies(List<Hobbies> hobbies) {
         this.hobbies = hobbies;
-    }
-
-    public Integer getIdHobbie() {
-        return idHobbie;
-    }
-
-    public void setIdHobbie(Integer idHobbie) {
-        this.idHobbie = idHobbie;
     }
 
 }
