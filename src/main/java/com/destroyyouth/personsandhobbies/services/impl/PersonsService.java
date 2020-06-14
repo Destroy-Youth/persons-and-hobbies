@@ -4,16 +4,20 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
+import com.destroyyouth.personsandhobbies.commons.dtos.PersonsDTO;
+import com.destroyyouth.personsandhobbies.commons.enums.Gender;
 import com.destroyyouth.personsandhobbies.model.Hobbies;
 import com.destroyyouth.personsandhobbies.model.Persons;
 import com.destroyyouth.personsandhobbies.persistence.IPersonsRepository;
 import com.destroyyouth.personsandhobbies.services.IHobbiesService;
 import com.destroyyouth.personsandhobbies.services.IPersonsService;
 import com.destroyyouth.personsandhobbies.utils.ExceptionSuppliers;
-import com.destroyyouth.personsandhobbies.commons.dtos.PersonsDTO;
+import com.destroyyouth.personsandhobbies.utils.Messages;
 
+import org.aspectj.lang.reflect.NoSuchAdviceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
@@ -33,9 +37,7 @@ public class PersonsService implements IPersonsService {
     public List<PersonsDTO> findAll() {
         List<Persons> persons = personsRepository.findAll();
 
-        List<PersonsDTO> personsTO = persons.stream().map(this::personsDTOMapper).collect(Collectors.toList());
-
-        return personsTO;
+        return persons.parallelStream().map(this::personsDTOMapper).collect(Collectors.toList());
     }
 
     @Override
@@ -45,9 +47,10 @@ public class PersonsService implements IPersonsService {
     }
 
     private PersonsDTO personsDTOMapper(Persons person) {
+
         PersonsDTO personDTO = new PersonsDTO();
 
-        personDTO.setId(person.getId());
+        personDTO.setId(person.getPersonId());
         personDTO.setFirstName(person.getFirstName());
         personDTO.setLastName(person.getLastName());
         personDTO.setBirthDate(person.getBirthDate().toString());
@@ -60,6 +63,11 @@ public class PersonsService implements IPersonsService {
     }
 
     private Persons personsMapper(PersonsDTO personTO) {
+
+        if (!Gender.exists(personTO.getSex()).booleanValue()) {
+            throw new NoSuchElementException(Messages.NOT_VALID_GENDER_VALUE);
+        }
+
         Persons person = new Persons();
         Date birthDate = new Date();
         try {
@@ -78,6 +86,7 @@ public class PersonsService implements IPersonsService {
         if (!ObjectUtils.isEmpty(personTO.getHobbies())) {
             List<Hobbies> hobbies = personTO.getHobbies().stream().map(hobbieTO -> {
                 Hobbies hobbie = new Hobbies();
+                hobbie.setHobbieId(hobbieTO.getId());
                 hobbie.setName(hobbieTO.getName());
                 return hobbie;
             }).collect(Collectors.toList());
