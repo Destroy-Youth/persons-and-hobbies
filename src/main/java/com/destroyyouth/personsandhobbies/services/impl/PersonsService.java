@@ -4,16 +4,20 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import com.destroyyouth.personsandhobbies.commons.dtos.PersonsDTO;
+import com.destroyyouth.personsandhobbies.commons.enums.Gender;
 import com.destroyyouth.personsandhobbies.model.Hobbies;
 import com.destroyyouth.personsandhobbies.model.Persons;
 import com.destroyyouth.personsandhobbies.persistence.IPersonsRepository;
 import com.destroyyouth.personsandhobbies.services.IHobbiesService;
 import com.destroyyouth.personsandhobbies.services.IPersonsService;
 import com.destroyyouth.personsandhobbies.utils.ExceptionSuppliers;
+import com.destroyyouth.personsandhobbies.utils.Messages;
 
+import org.aspectj.lang.reflect.NoSuchAdviceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
@@ -43,6 +47,7 @@ public class PersonsService implements IPersonsService {
     }
 
     private PersonsDTO personsDTOMapper(Persons person) {
+
         PersonsDTO personDTO = new PersonsDTO();
 
         personDTO.setId(person.getPersonId());
@@ -58,6 +63,11 @@ public class PersonsService implements IPersonsService {
     }
 
     private Persons personsMapper(PersonsDTO personTO) {
+
+        if (!Gender.exists(personTO.getSex()).booleanValue()) {
+            throw new NoSuchElementException(Messages.NOT_VALID_GENDER_VALUE);
+        }
+
         Persons person = new Persons();
         Date birthDate = new Date();
         try {
