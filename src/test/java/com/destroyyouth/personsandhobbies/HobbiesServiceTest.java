@@ -1,17 +1,21 @@
 package com.destroyyouth.personsandhobbies;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import com.destroyyouth.personsandhobbies.commons.dtos.HobbiesDTO;
 import com.destroyyouth.personsandhobbies.model.Hobbies;
 import com.destroyyouth.personsandhobbies.persistence.IHobbiesRepository;
 import com.destroyyouth.personsandhobbies.services.impl.HobbiesService;
+import com.destroyyouth.personsandhobbies.utils.Messages;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -65,6 +69,18 @@ public class HobbiesServiceTest {
         HobbiesDTO result = hobbiesService.findById(1);
         assertNotNull(result);
         assertNotNull(result.getName());
+    }
+
+    @Test
+    @DisplayName("Find hobbie by id, id doesn't exists.")
+    void findOneDoesntExists() {
+
+        when(hobbiesRepository.findById(anyInt())).thenThrow(new NoSuchElementException(Messages.NOT_FOUND));
+
+        NoSuchElementException result = assertThrows(NoSuchElementException.class, () -> hobbiesService.findById(1));
+
+        assertNotNull(result);
+        assertEquals(Messages.NOT_FOUND, result.getMessage());
     }
 
 }
