@@ -17,7 +17,6 @@ import com.destroyyouth.personsandhobbies.services.IPersonsService;
 import com.destroyyouth.personsandhobbies.utils.ExceptionSuppliers;
 import com.destroyyouth.personsandhobbies.utils.Messages;
 
-import org.aspectj.lang.reflect.NoSuchAdviceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
