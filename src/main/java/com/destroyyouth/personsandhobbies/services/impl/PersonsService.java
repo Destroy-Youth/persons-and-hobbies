@@ -18,6 +18,7 @@ import com.destroyyouth.personsandhobbies.utils.ExceptionSuppliers;
 import com.destroyyouth.personsandhobbies.utils.Messages;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -32,6 +33,7 @@ public class PersonsService implements IPersonsService {
     @Autowired
     private IHobbiesService hobbiesService;
 
+    @Cacheable("persons")
     @Override
     public List<PersonsDTO> findAll() {
         List<Persons> persons = personsRepository.findAll();
@@ -95,6 +97,7 @@ public class PersonsService implements IPersonsService {
         return person;
     }
 
+    @Cacheable(key = "#id", value = "persons")
     @Override
     public PersonsDTO findById(Integer id) {
         Persons person = personsRepository.findById(id).orElseThrow(ExceptionSuppliers.NOT_FOUND);
